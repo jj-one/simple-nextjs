@@ -4,7 +4,7 @@ import { title } from "process";
 
 async function getPosts() {
   const items = await dbConn.blogPost.findMany({
-    select: { title: true, content: true, imageUrl: true, authorName: true, authorImage: true, id: true, createdAt: true },
+    select: { title: true, content: true, imageUrl: true, id: true, createdAt: true },
     orderBy: { createdAt: "desc" },
   });
   return items;
