@@ -1,5 +1,5 @@
 import { dbConn } from '@/lib/db';
-import { signJwt, verifyJwt } from '@/lib/auth';
+import { signJwt } from '@/lib/auth';
 import bcrypt from 'bcryptjs';
 import { NextRequest, NextResponse } from 'next/server';
 

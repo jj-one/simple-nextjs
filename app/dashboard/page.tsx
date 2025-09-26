@@ -1,10 +1,7 @@
-import { cookies } from 'next/headers';
-import { verifyJwt } from '@/lib/auth';
+import { getCurrentUser } from '@/lib/current-user';
 
 export default async function DashboardPage() {
-  const cookieStore = await cookies(); // ✅ sync
-  const token = cookieStore.get('token')?.value;
-  const user = token ? await verifyJwt(token) : null;
+  const user = await getCurrentUser();
 
   return (
     <div className="p-6">
