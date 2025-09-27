@@ -5,7 +5,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-xl font-semibold">Welcome back, {user?.email}!</h1>
+      <h1 className="text-xl font-semibold">Welcome back, {user?.name}!</h1>
     </div>
   );
 }

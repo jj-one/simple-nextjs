@@ -6,6 +6,7 @@ const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
 export interface AuthPayload {
   id: string;
   email: string;
+  name: string;
   [key: string]: any;
 }
 
