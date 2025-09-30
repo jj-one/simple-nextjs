@@ -14,10 +14,6 @@ export async function createPost(formData: FormData) {
   const content = formData.get("content")?.valueOf() as string;
   const imageUrl = formData.get("url")?.valueOf() as string;
 
-  console.log("Title:", title);
-  console.log("Content:", content);
-  console.log("Image URL:", imageUrl);
-
  await dbConn.blogPost.create({
     data: {
       title,
