@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export async function createPost(formData: FormData) {
     const user = await getCurrentUser();
     if (!user) {
-      throw new Error("You must be logged in to create a post.");
+      return redirect("/login");
     }
 
   const title = formData.get("title")?.valueOf() as string
