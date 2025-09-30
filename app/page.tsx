@@ -1,6 +1,7 @@
 import { dbConn } from "@/lib/db";
 import Link from "next/link";
 import { getPosts } from "./actions";
+import { BlogPostCards } from "@/components/general/blog-post-cards";
 
 export default async function Home() {
 
@@ -11,11 +12,7 @@ export default async function Home() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {posts.map((post, index) => (
-          <div key={index} className="border border-gray-300 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
-            <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-            <p className="text-gray-700 mb-4">{post.content}</p>
-            <Link href="#" className="text-blue-500 hover:underline">Read more</Link>
-          </div>
+          <BlogPostCards key={post.id} data={post} />
         ))} 
       </div>
     </div>
