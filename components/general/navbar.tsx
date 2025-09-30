@@ -34,7 +34,12 @@ export function Navbar() {
       <div className="flex items-center gap-4">
         {!user && !isLoginPage && <Link href="/login" className={buttonVariants()}>Login</Link>}
         {!user && !isSignUpPage && <Link href="/sign-up" className={buttonVariants({ variant: 'outline' })}>Sign Up</Link>}
-        {user && <LogoutButton />}
+        {user && (
+          <>
+            <span className="hidden sm:inline font-medium">{user.name}</span>
+            <LogoutButton />
+          </>
+        )}
       </div>
     </nav>
   );

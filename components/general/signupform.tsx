@@ -11,9 +11,11 @@ export default function SignupForm() {
   const { refreshUser } = useAuth();
   const router = useRouter();
   const [error, setError] = useState('');
+  const [ loading, setLoading ] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData(e.currentTarget);
     const res = await fetch('/api/sign-up', {
       method: 'POST',
@@ -31,6 +33,7 @@ export default function SignupForm() {
     } else {
       setError('Sign-Up failed');
     }
+    setLoading(false);
   }
 
   return (
@@ -39,7 +42,7 @@ export default function SignupForm() {
       <Input name="name" type="text" placeholder="Your full name" required />
       <Input name="email" type="email" placeholder="Email" required />
       <Input name="password" type="password" placeholder="Password" required />
-      <Button type="submit" className="w-full">Sign Up</Button>
+      <Button type="submit" className="w-full" disabled={loading}>{loading ? "Signing up..." : "Sign up"}</Button>
     </form>
   );
 }

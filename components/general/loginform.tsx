@@ -11,9 +11,11 @@ export default function LoginForm() {
   const { refreshUser } = useAuth();
   const router = useRouter();
   const [error, setError] = useState('');
+  const [ loading, setLoading ] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData(e.currentTarget);
     const res = await fetch('/api/login', {
       method: 'POST',
@@ -30,6 +32,7 @@ export default function LoginForm() {
     } else {
       setError('Login failed');
     }
+    setLoading(false);
   }
 
   return (
@@ -37,7 +40,7 @@ export default function LoginForm() {
       {error && <p className="text-red-500">{error}</p>}
       <Input name="email" type="email" placeholder="Email" required />
       <Input name="password" type="password" placeholder="Password" required />
-      <Button type="submit" className="w-full">Login</Button>
+      <Button type="submit" className="w-full" disabled={loading}>{loading ? "Logging in..." : "Login"}</Button>
     </form>
   );
 }

@@ -1,14 +1,6 @@
 import { dbConn } from "@/lib/db";
 import Link from "next/link";
-import { title } from "process";
-
-async function getPosts() {
-  const items = await dbConn.blogPost.findMany({
-    select: { title: true, content: true, imageUrl: true, id: true, createdAt: true },
-    orderBy: { createdAt: "desc" },
-  });
-  return items;
-}
+import { getPosts } from "./actions";
 
 export default async function Home() {
 
