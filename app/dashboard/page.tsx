@@ -3,11 +3,10 @@ import { getCurrentUser } from '@/lib/current-user';
 import Link from 'next/link';
 import { getPosts } from '@/app/actions';
 import { BlogPostCards } from '@/components/general/blog-post-cards';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export default async function DashboardPage() {
-  const user = await getCurrentUser();
-
-  const posts = await getPosts(user?.id);
+export default function DashboardPage() {
 
   return (
     <div>
@@ -16,11 +15,23 @@ export default async function DashboardPage() {
         <Link href='/dashboard/create' className={buttonVariants()}>Create New Post</Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {posts.map((post, index) => (
-          <BlogPostCards key={post.id} data={post} />
-        ))} 
-      </div>
+      <Suspense fallback={<Skeleton className='h-120 w-full bg-gray-200' />}>
+        <DashboardPageBlogs />
+      </Suspense>
+    </div>
+  );
+}
+
+async function DashboardPageBlogs() {
+  const user = await getCurrentUser();
+
+  const posts = await getPosts(user?.id);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {posts.map((post, index) => (
+        <BlogPostCards key={post.id} data={post} />
+      ))} 
     </div>
   );
 }

@@ -5,12 +5,13 @@ import { usePathname } from "next/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { useAuth } from "@/context/authcontext";
 import { LogoutButton } from "@/components/general/logoutbutton";
+import { NavbarSkeleton } from "./navbar-skeleton";
 
 export function Navbar() {
   const { user, loading } = useAuth();
   const pathname = usePathname();
 
-  if (loading) return null;
+  if (loading) return <NavbarSkeleton />;
 
   const isLoginPage = pathname === '/login';
   const isSignUpPage = pathname === '/sign-up';
