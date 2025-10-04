@@ -35,7 +35,7 @@ export async function getPosts(userId?: string | null) {
       imageUrl: true, 
       id: true, 
       createdAt: true,
-      author: { select: { name: true } } 
+      author: { select: {id: true, name: true } } 
     },
     orderBy: { createdAt: "desc" },
   });

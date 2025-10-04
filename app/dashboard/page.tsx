@@ -2,9 +2,9 @@ import { buttonVariants } from '@/components/ui/button';
 import { getCurrentUser } from '@/lib/current-user';
 import Link from 'next/link';
 import { getPosts } from '@/app/actions';
-import { BlogPostCards } from '@/components/general/blog-post-cards';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { BlogPostCardsEditable } from '@/components/general/blog-post-cards-editable';
 
 export default function DashboardPage() {
 
@@ -30,7 +30,7 @@ async function DashboardPageBlogs() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {posts.map((post, index) => (
-        <BlogPostCards key={post.id} data={post} />
+        <BlogPostCardsEditable key={post.id} data={post} />
       ))} 
     </div>
   );
